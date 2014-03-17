@@ -1,0 +1,180 @@
+unit other;
+
+interface
+procedure setting;
+procedure clother;
+procedure about;
+
+implementation
+uses crt, drawing,choose_menu;
+
+procedure setting;
+
+
+const n=2;
+colortext=11;
+background=12;
+var
+  mas:array[1..n] of string;
+  x,y,i,j:integer;
+  c:char;
+
+
+begin
+  mas[1] := 'Цвет текста';
+  mas[2] := 'Цвет фона';
+  textbackground(0); //цвет всего фона
+  TextColor(15);
+  clrscr;
+  Gotoxy(24,5);
+
+  draw(37,9,'Настройки');
+  for i := 1 to n do
+  begin
+    GotoXY(23,6+i);   // 6+i
+    if i=1 then
+    begin
+      textbackground(background);
+      write(mas[i]);
+      textbackground(black);
+    end
+    else Write(mas[i]);
+  end;
+
+
+  j:=1; // номер элементов массива
+  x:=23;y:=7;
+  gotoxy(x,y);
+  repeat
+    c:=readkey;
+    if c = #0 then
+    begin
+      gotoxy(x,y);
+      c:=readkey;
+      case ord(c) of
+        72:
+          begin
+            if j<>1 then
+            begin
+              textbackground(black);
+              write(mas[j]);
+              y:=y-1;
+              j:=j-1;
+              gotoxy(x,y);
+              textbackground(background);
+              write(mas[j]);
+            end;
+          end;
+        80:
+          begin
+            if j<>n then
+            begin
+              textbackground(black);
+              write(mas[j]);
+              y:=y+1;
+              j:=j+1;
+              gotoxy(x,y);
+              textbackground(background);
+              write(mas[j]);
+            end;
+          end;
+      end;
+    end;
+  until (c=#13)or(c=#27);
+  if c=#13 then write('jjj')
+  else general_my_menu;
+end;
+
+procedure clother;
+const n=2;
+colortext=11;
+background=12;
+var
+  mas:array[1..n] of string;
+  x,y,i,j:integer;
+  c:char;
+
+
+begin
+  mas[1] := 'Да';
+  mas[2] := 'Нет';
+  textbackground(0); //цвет всего фона
+  TextColor(15);
+  clrscr;
+  Gotoxy(24,5);
+
+  draw(35,9,'Выход');
+  for i := 1 to n do
+  begin
+    GotoXY(23,6+i);   // 6+i
+    if i=1 then
+    begin
+      textbackground(background);
+      write(mas[i]);
+      textbackground(black);
+    end
+    else Write(mas[i]);
+  end;
+
+
+  j:=1; // номер элементов массива
+  x:=23;y:=7;
+  gotoxy(x,y);
+  repeat
+    c:=readkey;
+    if c = #0 then
+    begin
+      gotoxy(x,y);
+      c:=readkey;
+      case ord(c) of
+        72:
+          begin
+            if j<>1 then
+            begin
+              textbackground(black);
+              write(mas[j]);
+              y:=y-1;
+              j:=j-1;
+              gotoxy(x,y);
+              textbackground(background);
+              write(mas[j]);
+            end;
+          end;
+        80:
+          begin
+            if j<>n then
+            begin
+              textbackground(black);
+              write(mas[j]);
+              y:=y+1;
+              j:=j+1;
+              gotoxy(x,y);
+              textbackground(background);
+              write(mas[j]);
+            end;
+          end;
+      end;
+    end;
+  until (c=#13)or(c=#27);
+  if (c=#13) and (j=2) then general_my_menu;
+end;
+
+procedure about;
+var c:char;
+begin
+  textbackground(black);
+  clrscr;
+  draw(39,9, '   Автор');
+  gotoxy(24,7);
+  write('Лактюшин Денис');
+
+  repeat
+    c:=readkey;
+
+  until c=#27;
+  general_my_menu;
+
+end;
+
+end.
+
